@@ -35,7 +35,7 @@ df_brasil_indice <- df_estados %>%
 ui <- fluidPage(
     
     # Application title
-    titlePanel("Níveis de infecção por COVID-19 por estado no Brasil"),
+    titlePanel("Níveis de infecção por COVID-19 no Brasil"),
     
     sidebarLayout(
         sidebarPanel(
@@ -60,15 +60,15 @@ server <- function(input, output) {
         fill_var <-  input$nivel
         if(input$nivel == "alto") {
             fill_label <-  "Alto"
-            my_colors <-  (c(alto = "red"))
+            my_colors <-  (c(nivel = "red"))
         }  
         if(input$nivel == "baixo") {
             fill_label <-  "Baixo"
-            my_colors <-  (c(baixo = "green"))
+            my_colors <-  (c(nivel = "green"))
         }
         if(input$nivel == "estavel") {
             fill_label <-  "Estável"
-            my_colors <-  (c(estavel = "yellow"))
+            my_colors <-  (c(nivel = "yellow"))
         }  
         df_brasil_indice %>%
             #geom_sf(aes_string(fill = fill_var)) +
@@ -85,7 +85,7 @@ server <- function(input, output) {
             #theme(legend.position = "bottom", legend.direction = "vertical")
         
         ggplot() +
-            geom_sf(aes()) +
+            geom_sf(aes_string()) +
             scale_fill_manual(name = "Nível", values = my_colors) +
             theme_map() + 
             labs(x = NULL, 
