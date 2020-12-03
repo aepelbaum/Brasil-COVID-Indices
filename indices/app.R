@@ -39,7 +39,7 @@ ui <- fluidPage(
     
     sidebarLayout(
         sidebarPanel(
-            radioButtons("indice", label = "Selecione",
+            radioButtons("nivel", label = "Selecione",
                          choices = list("Alto" = "alto",
                                         "Baixo" = "baixo",
                                         "Estável" = "estavel"), 
@@ -57,18 +57,18 @@ ui <- fluidPage(
 server <- function(input, output) {
     
     output$drawMap <- renderPlot({
-        fill_var <-  input$indice
-        if(input$indice == "alto") {
+        fill_var <-  input$nivel
+        if(input$nivel == "alto") {
             fill_label <-  "Alto"
-            high_color <-  "red"
+            my_colors <-  (c(alto = "red"))
         }  
-        if(input$indice == "baixo") {
+        if(input$nivel == "baixo") {
             fill_label <-  "Baixo"
-            high_color <-  "green"
+            my_colors <-  (c(baixo = "green"))
         }
-        if(input$indice == "estavel") {
+        if(input$nivel == "estavel") {
             fill_label <-  "Estável"
-            high_color <-  "yellow"
+            my_colors <-  (c(estavel = "yellow"))
         }  
         df_brasil_indice %>%
             #geom_sf(aes_string(fill = fill_var)) +
@@ -78,11 +78,18 @@ server <- function(input, output) {
             #     y = NULL,
             #     title = "Níveis de infecção por COVID-19 no Brasil")
 
-            ggplot() +
-            geom_sf(aes_string(fill = fill_var), color= "black", size=.15) +
-            scale_fill_continuous(type = "gradient", low = "white", high = high_color, name = fill_label) +
-            coord_sf(datum = NA) +
-            theme(legend.position = "bottom", legend.direction = "vertical")
+            #ggplot() +
+            #geom_sf(aes_string(fill = fill_var), color= "black", size=.15) +
+            #scale_fill_continuous(type = "gradient", low = "white", high = high_color, name = fill_label) +
+            #coord_sf(datum = NA) +
+            #theme(legend.position = "bottom", legend.direction = "vertical")
+        
+        ggplot() +
+            geom_sf(aes()) +
+            scale_fill_manual(name = "Nível", values = my_colors) +
+            theme_map() + 
+            labs(x = NULL, 
+                 y = NULL)
         
     })
 }
