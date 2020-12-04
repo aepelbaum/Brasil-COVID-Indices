@@ -1,0 +1,12 @@
+name: Niveis
+title: Niveis
+username:
+account: aepelbaum
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3352380
+bundleId: 3943050
+url: https://aepelbaum.shinyapps.io/Niveis/
+when: 1607087344.43201
+asMultiple: FALSE
+asStatic: FALSE
