@@ -60,37 +60,23 @@ server <- function(input, output) {
         fill_var <-  input$nivel
         if(input$nivel == "alto") {
             fill_label <-  "Alto"
-            my_colors <-  (c(nivel = "red"))
+            fill_color <- "red"
         }  
         if(input$nivel == "baixo") {
             fill_label <-  "Baixo"
-            my_colors <-  (c(nivel = "green"))
+            fill_color <- "green"
         }
         if(input$nivel == "estavel") {
             fill_label <-  "Estável"
-            my_colors <-  (c(nivel = "yellow"))
+            fill_color <- "yellow"
         }  
         df_brasil_indice %>%
-            #geom_sf(aes_string(fill = fill_var)) +
-            #scale_fill_manual(name = "Nível", values = my_colors) +
-            #theme_map() + 
-            #labs(x = NULL, 
-            #     y = NULL,
-            #     title = "Níveis de infecção por COVID-19 no Brasil")
+            ggplot() + 
+            geom_sf(size=.15, show.legend = FALSE) +
+            geom_sf(fill = fill_color, data = df_brasil_indice %>% filter(Nivel == input$nivel)) + 
+            theme_minimal() +
+            coord_sf(datum = NA)
 
-            #ggplot() +
-            #geom_sf(aes_string(fill = fill_var), color= "black", size=.15) +
-            #scale_fill_continuous(type = "gradient", low = "white", high = high_color, name = fill_label) +
-            #coord_sf(datum = NA) +
-            #theme(legend.position = "bottom", legend.direction = "vertical")
-        
-        ggplot() +
-            geom_sf(aes_string()) +
-            scale_fill_manual(name = "Nível", values = my_colors) +
-            theme_map() + 
-            labs(x = NULL, 
-                 y = NULL)
-        
     })
 }
 
