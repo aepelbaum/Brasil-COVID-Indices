@@ -39,10 +39,13 @@ ui <- fluidPage(
     
     sidebarLayout(
         sidebarPanel(
-            checkboxGroupInput(inputId = "niveis",
-                              label = "Níveis de infecção:",
-                              choices = c("Alto" = "alto", "Baixo" = "baixo", "Estável" = "estavel"),
-                              selected = "")
+            checkboxInput("alto", label = "Alto", value = FALSE, width = NULL),
+            checkboxInput("baixo", label = "Baixo", value = FALSE, width = NULL),
+            checkboxInput("estavel", label = "Estável", value = FALSE, width = NULL),
+            #checkboxGroupInput(inputId = "niveis",
+            #                  label = "Níveis de infecção:",
+            #                  choices = c("Alto" = "alto", "Baixo" = "baixo", "Estável" = "estavel"),
+            #                  selected = "alto")
     ),
         
     #https://github.com/gpilgrim2670/SwimMap/blob/master/app.R
@@ -57,22 +60,30 @@ ui <- fluidPage(
 server <- function(input, output) {
     
     output$drawMap <- renderPlot({
-         fill_color_alto <- ""
-         fill_color_baixo <- ""
-         fill_color_estavel <- ""
-          if(input$niveis == "alto") {
-              fill_color_alto <- "red"
+          fill_color_alto <- str_c("white")
+          fill_color_baixo <- str_c("white")
+          fill_color_estavel <- str_c("white")
+          if(input$alto) {
+              fill_color_alto <- str_c("red")
+              fill_color_baixo <- str_c("white")
+              fill_color_estavel <- str_c("white")
           }  
-          if(input$niveis == "baixo") {
-              fill_color_baixo <- "green"
+          if(input$baixo) {
+              fill_color_alto <- str_c("white")
+              fill_color_baixo <- str_c("green")
+              fill_color_estavel <- str_c("white")
           }
-          if(input$niveis == "estavel") {
-              fill_color_estavel <- "yellow"
+          if(input$estavel) {
+              fill_color_alto <- str_c("white")
+              fill_color_baixo <- str_c("white")
+              fill_color_estavel <- str_c("yellow")
           }  
         df_brasil_indice %>%
             ggplot() + 
             geom_sf(size=.15, show.legend = FALSE) +
-            geom_sf(data = df_brasil_indice %>% filter(Nivel %in% input$niveis)) +
+            geom_sf(fill = fill_color_alto, data = df_brasil_indice %>% filter(Nivel %in% input$alto)) +
+            geom_sf(fill = fill_color_baixo, data = df_brasil_indice %>% filter(Nivel %in% input$baixo)) +
+            geom_sf(fill = fill_color_estavel, data = df_brasil_indice %>% filter(Nivel %in% input$estavel)) +
             scale_fill_manual() +
             theme_minimal() +
             coord_sf(datum = NA)
