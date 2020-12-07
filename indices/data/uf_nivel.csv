@@ -1,28 +1,28 @@
-UF;Sigla;Nivel
-Rondônia;RO;estavel
-Acre;AC;alto
-Amazonas;AM;baixo
-Roraima;RR;alto
-Pará;PA;baixo
-Amapá;AP;baixo
-Tocantins;TO;alto
-Maranhão;MA;baixo
-Piauí;PI;baixo
-Ceará;CE;baixo
-Rio Grande do Norte;RN;baixo
-Paraíba;PB;baixo
-Pernambuco;PE;estavel
-Alagoas;AL;baixo
-Sergipe;SE;estavel
-Bahia;BA;estavel
-Minas Gerais;MG;estavel
-Espírito Santo;ES;baixo
-Rio de Janeiro;RJ;alto
-São Paulo;SP;estavel
-Paraná;PR;estavel
-Santa Catarina;SC;alto
-Rio Grande do Sul;RS;alto
-Mato Grosso do Sul;MS;alto
-Mato Grosso;MT;estavel
-Goiás;GO;alto
-Distrito Federal;DF;estavel
+UF;Sigla;Nivel;Cor
+Rondônia;RO;estavel;yellow
+Acre;AC;alto;red
+Amazonas;AM;baixo;green
+Roraima;RR;alto;red
+Pará;PA;baixo;green
+Amapá;AP;baixo;green
+Tocantins;TO;alto;red
+Maranhão;MA;baixo;green
+Piauí;PI;baixo;green
+Ceará;CE;baixo;green
+Rio Grande do Norte;RN;baixo;green
+Paraíba;PB;baixo;green
+Pernambuco;PE;estavel;yellow
+Alagoas;AL;baixo;green
+Sergipe;SE;estavel;yellow
+Bahia;BA;estavel;yellow
+Minas Gerais;MG;estavel;yellow
+Espírito Santo;ES;baixo;green
+Rio de Janeiro;RJ;alto;red
+São Paulo;SP;estavel;yellow
+Paraná;PR;estavel;yellow
+Santa Catarina;SC;alto;red
+Rio Grande do Sul;RS;alto;red
+Mato Grosso do Sul;MS;alto;red
+Mato Grosso;MT;estavel;yellow
+Goiás;GO;alto;red
+Distrito Federal;DF;estavel;yellow

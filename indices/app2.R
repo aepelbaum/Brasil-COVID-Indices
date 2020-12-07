@@ -31,9 +31,6 @@ df_estados <- read_state(year=2018) %>%
 df_brasil_indice <- df_estados %>% 
     left_join(df_estados_indice, by = "UF")
 
-df_brasil_indice <- df_brasil_indice %>% 
-    mutate("Cor")
-
 # Define UI for application that draws a map
 ui <- fluidPage(
     
@@ -63,34 +60,28 @@ ui <- fluidPage(
 server <- function(input, output) {
     
     output$drawMap <- renderPlot({
-        
-          fill_color_alto <- str_c("white")
-          fill_color_baixo <- str_c("white")
-          fill_color_estavel <- str_c("white")
-        
-            if(input$niveis == str_c("alto")) {
-              fill_color_alto <- str_c("red")
-              fill_color_baixo <- str_c("white")
-              fill_color_estavel <- str_c("white")
-          }  
-          if(input$niveis == str_c("baixo")) {
-              fill_color_alto <- str_c("white")
-              fill_color_baixo <- str_c("green")
-              fill_color_estavel <- str_c("white")
-          }
-          if(input$niveis == str_c("estavel")) {
-              fill_color_alto <- str_c("white")
-              fill_color_baixo <- str_c("white")
-              fill_color_estavel <- str_c("yellow")
-          }  
+        cols <- c("alto" = "red", "baixo" = "green", "estavel" = "yellow")
+          # fill_color_alto <- "white"
+          # fill_color_baixo <- "white"
+          # fill_color_estavel <- "white"
+          # 
+          #   if(input$niveis == "alto") {
+          #     fill_color_alto <- "red"
+          # }  
+          # if(input$niveis  == "baixo") {
+          #     fill_color_baixo <- "green"
+          # }
+          # if(input$niveis == "estavel") {
+          #     fill_color_estavel <- "yellow"
+          # }  
         
           df_brasil_indice %>%
             ggplot() + 
             geom_sf(size=.15, show.legend = FALSE) +
-            geom_sf(fill = fill_color_alto, data = df_brasil_indice %>% filter(Nivel %in% input$alto)) +
-            geom_sf(fill = fill_color_baixo, data = df_brasil_indice %>% filter(Nivel %in% input$baixo)) +
-            geom_sf(fill = fill_color_estavel, data = df_brasil_indice %>% filter(Nivel %in% input$estavel)) +
-            scale_fill_manual() +
+            #geom_sf(fill = fill_color_alto, data = df_brasil_indice %>% filter(Nivel %in% input$niveis)) +
+            #geom_sf(fill = fill_color_baixo, data = df_brasil_indice %>% filter(Nivel %in% input$niveis)) +
+            geom_sf(data = df_brasil_indice %>% filter(Nivel %in% input$niveis)) +
+            scale_colour_manual(values = cols, aesthetics = c("colour", "fill")) +
             theme_minimal() +
             coord_sf(datum = NA)
 
